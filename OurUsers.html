@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Document</title>
+     <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+
+<body>
+     <h2>Registered Users</h2>
+     <table>
+          <thead>
+               <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+               </tr>
+          </thead>
+          <tbody id="usersTableBody">
+               <!-- Users will be loaded here -->
+          </tbody>
+     </table>
+     <script>
+          // Get users from localStorage
+          const users = JSON.parse(localStorage.getItem('users')) || [];
+          const tbody = document.getElementById('usersTableBody');
+
+          if (users.length === 0) {
+               const row = document.createElement('tr');
+               const cell = document.createElement('td');
+               cell.colSpan = 2;
+               cell.textContent = 'No users found.';
+               row.appendChild(cell);
+               tbody.appendChild(row);
+          } else {
+               users.forEach(user => {
+                    const row = document.createElement('tr');
+                    const usernameCell = document.createElement('td');
+                    const emailCell = document.createElement('td');
+                    usernameCell.textContent = user.username;
+                    emailCell.textContent = user.email;
+                    row.appendChild(usernameCell);
+                    row.appendChild(emailCell);
+                    tbody.appendChild(row);
+               });
+
+          }
+     </script>
+</body>
+
+</html>
